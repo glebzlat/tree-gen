@@ -1,3 +1,10 @@
+class TreeCreationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = this.constructor.name;
+  }
+}
+
 /** Yield parts of the string, separated by the delimiter
  *
  * @param {string} str input string
@@ -48,13 +55,6 @@ function* indentedBlocks(str) {
   }
 }
 
-class TreeCreationError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = this.constructor.name;
-  }
-}
-
 /** Go to the upper tree, unwinding indentation stack
  *
  * @param {Array<Array<int, int>>} indent_stack indentation stack
@@ -71,9 +71,7 @@ function dedent(indent_stack, subtree_stack, indent) {
     }
   }
 
-  throw new Error(
-    "indent level less than all previous levels",
-  );
+  throw new Error("indent level less than all previous levels");
 }
 
 /** Create a nested list from indented string
@@ -90,6 +88,10 @@ function createTree(str) {
   let line_count = 0;
   for (let [indent, content] of indentedBlocks(str)) {
     let [parent_indent, last_indent] = indents[indents.length - 1];
+
+    if (content.length == 0) {
+      continue;
+    }
 
     ++line_count;
     if (line_count == 1 && indent > 0) {
@@ -125,28 +127,4 @@ function createTree(str) {
   return tree;
 }
 
-
-// TODO: write unit tests!
-// console.log([...splitBy("hello world", " ")]);
-// console.log([...splitBy(" h e l l o ", " ")]);
-// console.log([...splitBy("   ", " ")]);
-// console.log([...splitBy("", " ")]);
-// console.log([...splitBy("hello", "\n")]);
-//
-// console.log(countLeadingSpace("hello"));
-// console.log(countLeadingSpace("  hello"));
-// console.log(countLeadingSpace(""));
-//
-// console.log([...indentedBlocks("line1\n line2\n  line3")]);
-// console.log([...indentedBlocks("line1\n\n   line3")]);
-// console.log([...indentedBlocks("")]);
-//
-// console.log(createTree("line1\nline2"));
-// console.log(createTree("line1\n  line2"));
-// console.log(createTree("line1\n  line2\n  line3"));
-// console.log(createTree("line1\n  line2\n    line3"));
-// console.log(createTree("line1\n  line2\n    line3\n   line4"));
-// console.log(createTree("line1\n  line2\n    line3\n  line4"));
-// console.log(createTree("line1\n  line2\n    line3\n line4"));
-// console.log(createTree("line1\n  line2\nline3"));
-// console.log(createTree("  line1\n  line2\nline3"));
+export { splitBy, countLeadingSpace, indentedBlocks, createTree };
