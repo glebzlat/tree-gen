@@ -1,4 +1,5 @@
 @use '../shared.scss' as *;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Mono&display=swap');
 
 .dark-theme {
   background-color: color(main-background);
@@ -10,6 +11,21 @@
 
 %theme-transition {
   transition: background-color $ease-out-expo .5s, border $ease-out-expo .5s;
+}
+
+.roboto-mono {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.3;
+}
+
+.roboto-condensed {
+  font-family: "Roboto Condensed", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .main {
@@ -67,7 +83,7 @@
 }
 
 .footer {
-  font-family: "sans-serif";
+  @extend .roboto-condensed;
   display: flex;
   padding: 0 rem(30);
   gap: 0 rem(30);
@@ -168,6 +184,7 @@
   @extend %theme-transition;
   flex-basis: 50%;
   overflow: auto;
+  padding: rem(16) rem(30);
 
   .dark-theme & {
     background-color: color(background);
@@ -178,17 +195,37 @@
   }
 }
 
+.code-editor {
+  height: 100%;
+  @extend .roboto-mono;
+  font-size: rem(13);
+
+  .dark-theme & {
+    color: color(text)
+  }
+
+  .light-theme & {
+    color: color(light-text)
+  }
+}
+
 .result-output {
   @extend %theme-transition;
+  padding: rem(16) rem(30);
   flex-basis: 50%;
   overflow: auto;
+  height: 100%;
+  @extend .roboto-mono;
+  font-size: rem(13);
 
   .dark-theme & {
     background-color: color(output-background);
+    color: color(text)
   }
 
   .light-theme & {
     background-color: color(light-output-background);
+    color: color(light-text)
   }
 }
 
@@ -252,14 +289,13 @@
 
   %switch-text {
     @extend %theme-transition;
+    @extend .roboto-condensed;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    font-family: sans-serif;
     font-size: rem(13px);
-    font-family: sans-serif;
     font-size: rem(13px);
     margin: auto;
     width: fit-content;

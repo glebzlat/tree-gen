@@ -6,6 +6,7 @@ import Copy from "./icons/Copy.svg";
 import Share from "./icons/Share.svg";
 import Settings from "./icons/Settings.svg";
 import { useEffect, useState } from "react";
+import Editor from "react-simple-code-editor";
 
 function DarkModeSwitch({ onChange, initialState = "light" }) {
   const darkState = { name: "dark", translate: 85 };
@@ -99,6 +100,8 @@ function App() {
     }
   }
 
+  const [code, setCode] = useState("some code");
+
   return (
     <main className={`${styles.main} ${themeState.style}`}>
       <div className={styles.container}>
@@ -129,8 +132,18 @@ function App() {
             </div>
           </div>
           <div className={styles.windowBody}>
-            <div className={styles.codeInput}></div>
-            <div className={styles.resultOutput}></div>
+            <div className={styles.codeInput}>
+              <Editor
+                className={styles.codeEditor}
+                value={code}
+                onValueChange={(code) => setCode(code)}
+                highlight={(code) => code}
+                tabSize={2}
+              />
+            </div>
+            <div className={styles.resultOutput}>
+              <pre>{code}</pre>
+            </div>
           </div>
           <div className={styles.footer}>
             <button className={styles.usageBtn}>
