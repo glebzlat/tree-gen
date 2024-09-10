@@ -209,14 +209,18 @@
   }
 }
 
-.result-output {
+.output-window {
   @extend %theme-transition;
-  padding: rem(16) rem(30);
   flex-basis: 50%;
   overflow: auto;
   height: 100%;
-  @extend .roboto-mono;
-  font-size: rem(13);
+
+  &__text {
+    @extend .roboto-mono;
+    width: max-content;
+    padding: rem(16) rem(30);
+    font-size: rem(13);
+  }
 
   .dark-theme & {
     background-color: color(output-background);

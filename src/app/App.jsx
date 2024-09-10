@@ -141,8 +141,8 @@ function App() {
                 tabSize={2}
               />
             </div>
-            <div className={styles.resultOutput}>
-              <pre>{code}</pre>
+            <div className={styles.outputWindow}>
+              <pre className={styles.outputWindowText}>{code}</pre>
             </div>
           </div>
           <div className={styles.footer}>
