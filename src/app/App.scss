@@ -1,0 +1,288 @@
+@use '../shared.scss' as *;
+
+.dark-theme {
+  background-color: color(main-background);
+}
+
+.light-theme {
+  background-color: color(light-main-background);
+}
+
+%theme-transition {
+  transition: background-color $ease-out-expo .5s, border $ease-out-expo .5s;
+}
+
+.main {
+  @extend %theme-transition;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  width: rem(1116px + 10px);
+  padding: 0 rem(5px);
+  margin: 0 auto;
+}
+
+.window {
+  @extend %theme-transition;
+  margin-top: rem(165px);
+  overflow: hidden;
+  border-radius: rem(7px);
+
+  .dark-theme & {
+    border: rem(1px) solid color(outer-border);
+  }
+
+  .light-theme & {
+    border: rem(1px) solid color(light-outer-border);
+  }
+}
+
+.header {
+  @extend %theme-transition;
+  display: flex;
+  justify-content: space-between;
+  height: rem(39px);
+  padding: rem(7px) rem(15px);
+
+  .dark-theme & {
+    background-color: color(element-background);
+  }
+
+  .light-theme & {
+    background-color: color(light-element-background);
+  }
+
+  &__user-actions {
+    display: flex;
+    gap: 0 rem(24px);
+  }
+
+  &__share-actions {
+    display: flex;
+    gap: 0 rem(15px);
+  }
+}
+
+.footer {
+  font-family: "sans-serif";
+  display: flex;
+  padding: 0 rem(30);
+  gap: 0 rem(30);
+  align-items: center;
+  justify-content: start;
+  height: rem(39px);
+
+  .dark-theme & {
+    background-color: color(element-background);
+  }
+
+  .light-theme & {
+    background-color: color(light-element-background);
+  }
+}
+
+.usage-btn {
+  color: #fff;
+
+  &__text {
+    font-size: rem(14);
+  }
+}
+
+.author {
+  color: #fff;
+  font-size: rem(12);
+  opacity: 50%;
+  display: block;
+
+  &__link {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+.action-button {
+  @extend %theme-transition;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: rem(26px);
+  height: rem(26px);
+  border-radius: rem(13px);
+
+  .dark-theme & {
+    background-color: color(icons-background);
+  }
+
+  .light-theme & {
+    background-color: color(light-icons-background);
+  }
+}
+
+.github-icon {
+  width: rem(26.6px);
+  height: rem(26.6px);
+}
+
+.download-icon {
+  width: rem(14px);
+  height: rem(13px);
+}
+
+.copy-icon {
+  width: rem(12px);
+  height: rem(12px);
+}
+
+.share-icon {
+  width: rem(13px);
+  height: rem(11px);
+}
+
+.settings-icon {
+  width: rem(16px);
+  height: rem(16px);
+}
+
+.window-body {
+  height: rem(554px);
+  display: flex;
+
+  // The gap between two windows reveals the window-body background,
+  // which acts as the inner border.
+  gap: 0 rem(1px);
+
+  .dark-theme & {
+    background-color: color(inner-border);
+  }
+
+  .light-theme & {
+    background-color: color(light-inner-border);
+  }
+}
+
+.code-input {
+  @extend %theme-transition;
+  flex-basis: 50%;
+  overflow: auto;
+
+  .dark-theme & {
+    background-color: color(background);
+  }
+
+  .light-theme & {
+    background-color: color(light-background);
+  }
+}
+
+.result-output {
+  @extend %theme-transition;
+  flex-basis: 50%;
+  overflow: auto;
+
+  .dark-theme & {
+    background-color: color(output-background);
+  }
+
+  .light-theme & {
+    background-color: color(light-output-background);
+  }
+}
+
+// this should be placed into separate component
+
+.dark-mode-switch {
+  position: relative;
+  width: rem(105);
+  height: rem(26);
+
+  &__input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__slider {
+    @extend %theme-transition;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+    border-radius: rem(13px);
+
+    .dark-theme & {
+      background-color: color(theme-switch-background);
+    }
+
+    .light-theme & {
+      background-color: color(light-theme-switch-background);
+    }
+  }
+
+  &-inner {
+    @extend %theme-transition;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: rem(53px);
+    height: rem(20px);
+    margin: auto rem(4px);
+    border-radius: rem(10px);
+    margin: auto rem(4);
+    transition: transform $ease-out-expo 0.7s;
+
+    .dark-theme & {
+      background-color: color(theme-switch-foreground);
+    }
+
+    .light-theme & {
+      background-color: color(light-theme-switch-foreground);
+    }
+  }
+
+  %switch-text {
+    @extend %theme-transition;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: sans-serif;
+    font-size: rem(13px);
+    font-family: sans-serif;
+    font-size: rem(13px);
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    transition: opacity $ease-out-expo 0.8s;
+    user-select: none;
+
+    .dark-theme & {
+      color: color(theme-switch-text);
+    }
+
+    .light-theme & {
+      color: color(light-theme-switch-text);
+    }
+  }
+
+  &__text-light {
+    @extend %switch-text;
+    color: color(icons);
+  }
+
+  &__text-dark {
+    @extend %switch-text;
+    color: color(icons);
+  }
+}

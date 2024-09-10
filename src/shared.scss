@@ -1,0 +1,53 @@
+@use 'sass:math';
+
+$ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+$colors: (
+  "main-background": #303C40,
+  "background": #262F32,
+  "output-background": #303C40,
+  "element-background": #414F53,
+  "outer-border": #6C6C6C,
+  "inner-border": #6C6C6C,
+  "icons": #E2E2E2,
+  "icons-background": #20282B,
+  "text": #FFFFFF,
+  "icon-text": #E2E2E2,
+  "theme-switch-background": #20282B,
+  "theme-switch-foreground": #303C40,
+  "theme-switch-text": #E2E2E2,
+
+  "light-main-background": #EEF9FD,
+  "light-background": #D7E8EE,
+  "light-output-background": #EEFAFF,
+  "light-element-background": #596B70,
+  "light-outer-border": #596B70,
+  "light-inner-border": #D1D1D1,
+  "light-icons": #E2E2E2,
+  "light-icons-background": #39474A,
+  "light-text": #262F32,
+  "light-icon-text": #141414,
+  "light-theme-switch-background": #D1E0E4,
+  "light-theme-switch-foreground": #ECF9FE,
+  "light-theme-switch-text": #141414,
+);
+
+@function color($name) {
+  @return map-get($colors, $name);
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return math.div($number, ($number * 0 + 1));
+  }
+
+  @return $number;
+}
+
+@function rem($pixels) {
+  @if math.unit($pixels) == "px" or math.is-unitless($pixels) {
+    @return strip-unit(math.div($pixels, 16)) * 1rem;
+  }
+  @error "Value must be unitless or in pixels: #{$pixels}"
+}
+

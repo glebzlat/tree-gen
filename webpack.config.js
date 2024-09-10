@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -12,10 +13,22 @@ module.exports = {
     rules: [
       {
         test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                namedExport: false,
+                localIdentName: "[name]__[local]--[hash:base64:5]",
+              },
+            },
+          },
+          "sass-loader",
+        ],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif)$/i,
         type: "asset/resource",
       },
       {
@@ -35,6 +48,11 @@ module.exports = {
         test: /\.html?$/,
         loader: "html-loader",
       },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: [{ loader: "@svgr/webpack", options: { icon: true } }],
+      },
     ],
   },
   plugins: [
@@ -42,9 +60,11 @@ module.exports = {
       scriptLoading: "defer",
       template: path.resolve(__dirname, "src", "index.html"),
     }),
+    new MiniCssExtractPlugin(),
   ],
-  devtool: "inline-source-map",
+  devtool: "source-map",
   devServer: {
+    port: 3000,
     static: "./dist",
   },
   // optimization: {
