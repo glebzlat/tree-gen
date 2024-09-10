@@ -7,69 +7,7 @@ import Share from "./icons/Share.svg";
 import Settings from "./icons/Settings.svg";
 import { useEffect, useState } from "react";
 import Editor from "react-simple-code-editor";
-
-function DarkModeSwitch({ onChange, initialState = "light" }) {
-  const darkState = { name: "dark", translate: 85 };
-  const lightState = { name: "light", translate: 0 };
-  const darkText = "dark";
-  const lightText = "light";
-
-  const [state, setState] = useState(lightState);
-
-  useEffect(() => {
-    switch (initialState) {
-      case "dark":
-        initialState = darkState;
-        break;
-      case "light":
-        initialState = lightState;
-        break;
-    }
-
-    setState(initialState);
-  }, [initialState]);
-
-  function handleChange() {
-    if (state.name == "light") {
-      setState(darkState);
-      onChange && onChange("dark");
-    } else {
-      setState(lightState);
-      onChange && onChange("light");
-    }
-  }
-
-  return (
-    <label className={styles.darkModeSwitch}>
-      <input
-        onChange={handleChange}
-        type="checkbox"
-        className={styles.darkModeSwitchInput}
-      />
-      <div className={styles.darkModeSwitchSlider}>
-        <div
-          className={styles.darkModeSwitchInner}
-          style={{
-            transform: `translateX(${state.translate}%)`,
-          }}
-        >
-          <div
-            className={styles.darkModeSwitchTextLight}
-            style={{ opacity: state.name == "light" ? "1" : "0" }}
-          >
-            {lightText}
-          </div>
-          <div
-            className={styles.darkModeSwitchTextDark}
-            style={{ opacity: state.name == "dark" ? "1" : "0" }}
-          >
-            {darkText}
-          </div>
-        </div>
-      </div>
-    </label>
-  );
-}
+import DarkModeSwitch from "./dark-mode-switch/DarkModeSwitch.jsx";
 
 function detectTheme(callback) {
   const getThemeName = (e) => (e && e.matches ? "dark" : "light");
