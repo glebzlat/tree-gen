@@ -67,10 +67,8 @@ describe("createTree", function () {
     ["line2", ["line3", "line4"]],
   ]);
 
-  // XXX: line4 should be nested
   assert.deepEqual(createTree("line1\n  line2\n    line3\n line4"), [
     "line1",
-    ["line2", ["line3"]],
-    "line4",
+    ["line2", ["line3"], "line4"],
   ]);
 });

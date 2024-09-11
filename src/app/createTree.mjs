@@ -93,6 +93,13 @@ function createTree(str) {
       continue;
     }
 
+    if (indent % 2) {
+      // Align indentation to multiples of 2 to avoid the bug caused by
+      // indentation that is too small. If indent == 1, it causes the tree
+      // creator to step up to the parent nesting level.
+      indent += 1;
+    }
+
     ++line_count;
     if (line_count == 1 && indent > 0) {
       throw new TreeCreationError("first line must not be indented");
