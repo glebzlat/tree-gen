@@ -47,9 +47,9 @@ function DarkModeSwitch({ onChange, initialState = "light" }) {
         type="checkbox"
         className={`${styles.darkModeSwitchInput} ${state.className}`}
       />
-      <div className={`${styles.darkModeSwitchSlider} ${state.className}`}>
+      <div className={`${styles.darkModeSwitchBody} ${state.className}`}>
         <div
-          className={`${styles.darkModeSwitchInner} ${state.className}`}
+          className={`${styles.darkModeSwitchSlider} ${state.className}`}
           style={{
             transform: `translateX(${state.translate}%)`,
           }}

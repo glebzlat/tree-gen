@@ -11,7 +11,7 @@
     height: 0;
   }
 
-  &__slider {
+  &-body {
     @extend %theme-transition;
     position: absolute;
     top: 0;
@@ -21,18 +21,16 @@
     cursor: pointer;
     border-radius: rem(13px);
 
-    .dark-theme & {
-      /*! keep */
+    &.dark-theme {
       background-color: color(theme-switch-background);
     }
 
-    .light-theme & {
-      /*! keep */
+    &.light-theme {
       background-color: color(light-theme-switch-background);
     }
   }
 
-  &-inner {
+  &-slider {
     @extend %theme-transition;
     display: flex;
     justify-content: center;
@@ -59,6 +57,7 @@
   }
 }
 
+
 .switch-text {
   @extend %theme-transition;
   @extend .roboto-condensed;
@@ -74,6 +73,7 @@
   height: fit-content;
   transition: opacity $ease-out-expo 0.8s;
   user-select: none;
+  background-color: transparent;
 
   .dark-theme & {
     color: color(theme-switch-text);
