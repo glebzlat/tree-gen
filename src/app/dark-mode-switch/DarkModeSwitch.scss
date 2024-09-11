@@ -57,39 +57,29 @@
       background-color: color(light-theme-switch-foreground);
     }
   }
+}
 
-  %switch-text {
-    @extend %theme-transition;
-    @extend .roboto-condensed;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    font-size: rem(13px);
-    font-size: rem(13px);
-    margin: auto;
-    width: fit-content;
-    height: fit-content;
-    transition: opacity $ease-out-expo 0.8s;
-    user-select: none;
+.switch-text {
+  @extend %theme-transition;
+  @extend .roboto-condensed;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: rem(13px);
+  font-size: rem(13px);
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  transition: opacity $ease-out-expo 0.8s;
+  user-select: none;
 
-    .dark-theme & {
-      color: color(theme-switch-text);
-    }
-
-    .light-theme & {
-      color: color(light-theme-switch-text);
-    }
+  .dark-theme & {
+    color: color(theme-switch-text);
   }
 
-  &__text-light {
-    @extend %switch-text;
-    color: color(icons);
-  }
-
-  &__text-dark {
-    @extend %switch-text;
-    color: color(icons);
+  .light-theme & {
+    color: color(light-theme-switch-text);
   }
 }
