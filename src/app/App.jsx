@@ -24,6 +24,30 @@ function detectTheme(callback) {
   }, []);
 }
 
+/**
+ * @param {string} text
+ * @returns {string}
+ */
+function highlight(text) {
+  let parts = [];
+  for (let [indent, content] of indentedBlocks(text)) {
+    let blocks = Math.floor(indent / 2);
+    let line = [];
+
+    for (let i = 0; i < blocks; ++i) {
+      line.push('<span>  </span>');
+    }
+
+    if (indent - blocks * 2 != 0) {
+      content = " " + content;
+    }
+
+    line.push(content);
+    parts.push(line.join(''));
+  }
+  return parts.join('\n');
+}
+
 function App() {
   const lightTheme = { name: "light", style: styles.lightTheme };
   const darkTheme = { name: "dark", style: styles.darkTheme };
@@ -76,7 +100,7 @@ function App() {
                 className={styles.codeEditor}
                 value={code}
                 onValueChange={(code) => setCode(code)}
-                highlight={(code) => code}
+                highlight={highlight}
                 tabSize={2}
               />
             </div>

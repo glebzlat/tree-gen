@@ -179,6 +179,27 @@
   .light-theme & {
     color: color(light-text)
   }
+
+  & span {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      content: "";
+      right: rem(2);
+      top: 0;
+      width: rem(2);
+      height: 100%;
+
+      .dark-theme & {
+        background-color: color(indents);
+      }
+
+      .light-theme & {
+        background-color: color(light-indents);
+      }
+    }
+  }
 }
 
 .output-window {
