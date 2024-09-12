@@ -8,6 +8,7 @@ import Settings from "./icons/Settings.svg";
 import { useEffect, useState } from "react";
 import Editor from "react-simple-code-editor";
 import DarkModeSwitch from "./dark-mode-switch/DarkModeSwitch.jsx";
+import { indentedBlocks, createTree, generateTree } from "./createTree.mjs";
 
 function detectTheme(callback) {
   const getThemeName = (e) => (e && e.matches ? "dark" : "light");
@@ -80,7 +81,9 @@ function App() {
               />
             </div>
             <div className={styles.outputWindow}>
-              <pre className={styles.outputWindowText}>{code}</pre>
+              <pre className={styles.outputWindowText}>
+                {generateTree(createTree(code))}
+              </pre>
             </div>
           </div>
           <div className={styles.footer}>

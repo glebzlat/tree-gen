@@ -134,4 +134,57 @@ function createTree(str) {
   return tree;
 }
 
-export { splitBy, countLeadingSpace, indentedBlocks, createTree };
+/**
+ * @param {Array<string, Array>} tree
+ * @returns {string}
+ */
+function generateTree(tree) {
+  if (tree.length == 0) {
+    return "";
+  }
+
+  function dfs(subtree, parentPrefix, level) {
+    let lines = [];
+
+    const nodeCount = subtree.reduce((a, i) => {
+      return a + (typeof i == "string" ? 1 : 0);
+    }, 0);
+
+    let index = 1;
+    let branchType, prefixType = "    ";
+
+    for (let node of subtree) {
+      let prefix = level > 1 ? parentPrefix : "";
+      if (Array.isArray(node)) {
+        lines.push(dfs(node, prefix + prefixType, level + 1));
+        continue
+      }
+
+      const isLast = index == nodeCount;
+      if (isLast) {
+        branchType = "└";
+        prefixType = "    ";
+      } else {
+        branchType = "├";
+        prefixType = "│   ";
+      }
+
+      let branch = level == 0 ? "" : `${branchType}── `;
+
+      if (typeof node == "string") {
+        lines.push(`${prefix}${branch}${node}`);
+        ++index;
+        continue;
+      }
+      //
+      // lines.push(dfs(node, prefix + prefixType, level + 1));
+    }
+
+    return lines.join("\n");
+  }
+
+  return dfs(tree, "", 0);
+}
+
+export default createTree;
+export { splitBy, countLeadingSpace, indentedBlocks, createTree, generateTree};
