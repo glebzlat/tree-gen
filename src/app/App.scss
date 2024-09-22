@@ -55,7 +55,7 @@
 }
 
 .footer {
-  @extend .roboto-condensed;
+  @extend .font-sans-serif;
   display: flex;
   padding: 0 rem(30);
   gap: 0 rem(30);
@@ -169,7 +169,7 @@
 
 .code-editor {
   height: 100%;
-  @extend .roboto-mono;
+  @extend .font-mono;
   font-size: rem(13);
 
   .dark-theme & {
@@ -209,7 +209,7 @@
   height: 100%;
 
   &__text {
-    @extend .roboto-mono;
+    @extend .font-mono;
     width: max-content;
     padding: rem(16) rem(30);
     font-size: rem(13);
