@@ -210,6 +210,7 @@
 
   &__text {
     @extend .font-mono;
+    white-space: pre-wrap;
     width: max-content;
     padding: rem(16) rem(30);
     font-size: rem(13);
