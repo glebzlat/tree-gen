@@ -4,11 +4,12 @@ import Github from "./icons/Github.svg";
 import Download from "./icons/Download.svg";
 import Copy from "./icons/Copy.svg";
 import Share from "./icons/Share.svg";
-import Settings from "./icons/Settings.svg";
+import SettingsIco from "./icons/Settings.svg";
 import { useEffect, useState } from "react";
 import Editor from "react-simple-code-editor";
 import DarkModeSwitch from "./dark-mode-switch/DarkModeSwitch.jsx";
 import { indentedBlocks, createTree, generateTree } from "./createTree.mjs";
+import Settings from "./settings/Settings.jsx";
 
 function detectTheme(callback) {
   const getThemeName = (e) => (e && e.matches ? "dark" : "light");
@@ -35,7 +36,7 @@ function highlight(text) {
     let line = [];
 
     for (let i = 0; i < blocks; ++i) {
-      line.push('<span>  </span>');
+      line.push("<span>  </span>");
     }
 
     if (indent - blocks * 2 != 0) {
@@ -43,9 +44,9 @@ function highlight(text) {
     }
 
     line.push(content);
-    parts.push(line.join(''));
+    parts.push(line.join(""));
   }
-  return parts.join('\n');
+  return parts.join("\n");
 }
 
 function App() {
@@ -64,6 +65,8 @@ function App() {
   }
 
   const [code, setCode] = useState("some code");
+
+  const [settingsVisible, setSettingsVisible] = useState(false);
 
   return (
     <main className={`${styles.main} ${themeState.style}`}>
@@ -85,8 +88,11 @@ function App() {
                   <Share className={styles.shareIcon} />
                 </button>
               </div>
-              <button className={styles.actionButton}>
-                <Settings className={styles.settingsIcon} />
+              <button
+                className={styles.actionButton}
+                onClick={() => setSettingsVisible(!settingsVisible)}
+              >
+                <SettingsIco className={styles.settingsIcon} />
               </button>
               <DarkModeSwitch
                 onChange={(state) => setThemeClass(state)}
@@ -109,6 +115,11 @@ function App() {
                 {generateTree(createTree(code))}
               </pre>
             </div>
+            <Settings
+              visible={settingsVisible}
+              setVisible={setSettingsVisible}
+              isDarkStyle={themeState.name != "light"}
+            />
           </div>
           <div className={styles.footer}>
             <button className={styles.usageBtn}>
