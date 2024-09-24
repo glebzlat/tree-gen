@@ -35,8 +35,13 @@ function highlight(text) {
     let blocks = Math.floor(indent / 2);
     let line = [];
 
-    for (let i = 0; i < blocks; ++i) {
+    let i = 0;
+    for (; i < blocks - 1; ++i) {
       line.push("<span>  </span>");
+    }
+
+    if (blocks - i == 1) {
+      content = "  " + content;
     }
 
     if (indent - blocks * 2 != 0) {
