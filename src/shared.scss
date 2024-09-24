@@ -33,6 +33,9 @@ $colors: (
   "light-theme-switch-foreground": #ECF9FE,
   "light-theme-switch-text": #141414,
   "light-indents": #BECED4,
+
+  "switch-active": #33AED7,
+  "light-switch-active": #3DC9FF
 );
 
 @function color($name) {

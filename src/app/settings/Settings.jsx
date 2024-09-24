@@ -1,5 +1,6 @@
 import styles from "./Settings.scss";
 import Close from "../icons/Close.svg";
+import Switch from "../switch/Switch.jsx";
 
 function Settings({ visible, setVisible, isDarkStyle }) {
   function getActiveClass() {
@@ -23,10 +24,11 @@ function Settings({ visible, setVisible, isDarkStyle }) {
             className={styles.settingsClose}
             onClick={() => setVisible(false)}
           >
-            <Close className={styles.settingsCloseIcon} fill={'#fff'}/>
+            <Close className={styles.settingsCloseIcon} fill={"#fff"} />
           </button>
           <div className={styles.settingsHeaderUnderline}></div>
         </div>
+        <Switch isDarkStyle={isDarkStyle} onToggle={() => {}} />
       </div>
     </div>
   );

@@ -1,0 +1,65 @@
+@use "../../shared.scss" as *;
+
+.switch {
+  @extend %theme-transition;
+  position: relative;
+  width: rem(46);
+  height: rem(26);
+  border-radius: rem(13);
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer;
+
+  & input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  &-slider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  &-slider::before {
+    transition: all $ease-out-expo 0.5s;
+    content: "";
+    position: absolute;
+    top: rem(3);
+    left: rem(3);
+    width: rem(20);
+    height: rem(20);
+    border-radius: 100%;
+
+    .dark-theme & {
+      background-color: color(main-background);
+    }
+
+    .light-theme & {
+      background-color: color(light-main-background);
+    }
+
+    .dark-theme.switch--active & {
+      background-color: color(switch-active);
+    }
+
+    .light-theme.switch--active & {
+      background-color: color(light-switch-active);
+    }
+
+    .switch--active & {
+      transform: translateX(rem(20));
+    }
+  }
+
+  &.dark-theme {
+    background-color: color(icons-background);
+  }
+
+  &.light-theme {
+    background-color: color(light-theme-switch-background);
+  }
+}
