@@ -136,9 +136,16 @@ function createTree(str) {
 
 /**
  * @param {Array<string, Array>} tree
+ * @param {Object} chars
+ * @param {string} [chars.leafBranchChar="└"]
+ * @param {string} [chars.branchChar="├"]
+ * @param {string} [chars.straightBranchChar="│"]
  * @returns {string}
  */
-function generateTree(tree) {
+function generateTree(
+  tree,
+  { leafBranchChar = "└", branchChar = "├", straightBranchChar = "│" } = {},
+) {
   if (tree.length == 0) {
     return "";
   }
@@ -151,22 +158,23 @@ function generateTree(tree) {
     }, 0);
 
     let index = 1;
-    let branchType, prefixType = "    ";
+    let branchType,
+      prefixType = "    ";
 
     for (let node of subtree) {
       let prefix = level > 1 ? parentPrefix : "";
       if (Array.isArray(node)) {
         lines.push(dfs(node, prefix + prefixType, level + 1));
-        continue
+        continue;
       }
 
       const isLast = index == nodeCount;
       if (isLast) {
-        branchType = "└";
+        branchType = leafBranchChar;
         prefixType = "    ";
       } else {
-        branchType = "├";
-        prefixType = "│   ";
+        branchType = branchChar;
+        prefixType = straightBranchChar + "   ";
       }
 
       let branch = level == 0 ? "" : `${branchType}── `;

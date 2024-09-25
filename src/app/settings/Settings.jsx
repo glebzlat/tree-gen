@@ -1,6 +1,7 @@
 import styles from "./Settings.scss";
 import Close from "../icons/Close.svg";
 import Switch from "../switch/Switch.jsx";
+import Dropdown from "../dropdown/Dropdown.jsx";
 
 /**
  * @param {Object} props
@@ -13,6 +14,28 @@ function BooleanItem({ title, onToggle, isDarkStyle }) {
     <div className={styles.settingsItem}>
       <Switch isDarkStyle={isDarkStyle} onToggle={onToggle} />
       <p className="settings__item-text">{title}</p>
+    </div>
+  );
+}
+
+/**
+ * @param {Object} props
+ * @param {string} props.title
+ * @param {Array<string>} props.values
+ * @param {string} props.defaultValue
+ * @param {(string) => undefined} props.onChange
+ * @param {boolean} props.isDarkStyle
+ */
+function EnumItem({ title, values, defaultValue, onChange, isDarkStyle }) {
+  return (
+    <div className={styles.settingsItem}>
+      <p className="settings__item-text">{title}</p>
+      <Dropdown
+        variants={values}
+        defaultVariant={defaultValue}
+        onChange={onChange}
+        isDarkStyle={isDarkStyle}
+      />
     </div>
   );
 }
@@ -59,4 +82,4 @@ function Settings({ visible, setVisible, isDarkStyle, children }) {
   );
 }
 
-export { Settings, BooleanItem };
+export { Settings, BooleanItem, EnumItem };

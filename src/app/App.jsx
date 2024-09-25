@@ -14,7 +14,7 @@ import {
   generateTree,
   addParents,
 } from "./createTree.mjs";
-import { Settings, BooleanItem } from "./settings/Settings.jsx";
+import { Settings, BooleanItem, EnumItem } from "./settings/Settings.jsx";
 
 function detectTheme(callback) {
   const getThemeName = (e) => (e && e.matches ? "dark" : "light");
@@ -76,6 +76,18 @@ function App() {
 
   const [code, setCode] = useState("some code");
 
+  const fancyTree = {
+    leafBranchChar: "└",
+    branchChar: "├",
+    straightBranchChar: "│",
+  };
+  const asciiTree = {
+    leafBranchChar: "+",
+    branchChar: "|",
+    straightBranchChar: "|",
+  };
+  const [treeStyle, setTreeStyle] = useState(fancyTree);
+
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [dotRoot, setDotRoot] = useState(false);
   const [parentNodes, setParentNodes] = useState(false);
@@ -89,7 +101,7 @@ function App() {
     if (parentNodes) {
       tree = addParents(tree, trailingSlash);
     }
-    return generateTree(tree);
+    return generateTree(tree, treeStyle);
   }
 
   let isDarkStyle = themeState.name != "light";
@@ -144,11 +156,19 @@ function App() {
               setVisible={setSettingsVisible}
               isDarkStyle={isDarkStyle}
             >
-              <BooleanItem
+              <EnumItem
                 title="Tree Style"
-                onToggle={() => {}}
+                values={["fancy", "ascii"]}
+                defaultValue="fancy"
+                onChange={(result) => {
+                  if (result === "fancy") {
+                    setTreeStyle(fancyTree);
+                  } else if (result === "ascii") {
+                    setTreeStyle(asciiTree);
+                  }
+                }}
                 isDarkStyle={isDarkStyle}
-              ></BooleanItem>
+              />
               <BooleanItem
                 title="Insert ‘.’ as root node"
                 onToggle={() => setDotRoot(!dotRoot)}
