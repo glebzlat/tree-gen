@@ -74,6 +74,22 @@
     }
   }
 
+  &__body {
+    width: 100%;
+    height: 100%;
+    margin: rem(11) 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0 rem(12);
+  }
+
+  &__item + &__item {
+    margin-top: rem(16);
+  }
+
   &.dark-theme {
     background-color: color(main-background);
     color: color(text);

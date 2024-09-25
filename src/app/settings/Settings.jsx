@@ -2,7 +2,30 @@ import styles from "./Settings.scss";
 import Close from "../icons/Close.svg";
 import Switch from "../switch/Switch.jsx";
 
-function Settings({ visible, setVisible, isDarkStyle }) {
+/**
+ * @param {Object} props
+ * @param {string} props.title
+ * @param {Function} props.onToggle
+ * @param {boolean} props.isDarkStyle
+ */
+function BooleanItem({ title, onToggle, isDarkStyle }) {
+  return (
+    <div className={styles.settingsItem}>
+      <Switch isDarkStyle={isDarkStyle} onToggle={onToggle} />
+      <p className="settings__item-text">{title}</p>
+    </div>
+  );
+}
+
+/** Settings window
+ *
+ * @param {Object} props
+ * @param {boolean} props.visible is settings window visible
+ * @param {Function} props.setVisible visibility state setter
+ * @param {boolean} props.isDarkStyle is app dark (true) or light (false) style
+ * @param {React.ReactNode} children
+ */
+function Settings({ visible, setVisible, isDarkStyle, children }) {
   function getActiveClass() {
     if (visible) return styles.settingsActive;
     else return "";
@@ -28,10 +51,12 @@ function Settings({ visible, setVisible, isDarkStyle }) {
           </button>
           <div className={styles.settingsHeaderUnderline}></div>
         </div>
-        <Switch isDarkStyle={isDarkStyle} onToggle={() => {}} />
+        <div className={styles.settingsBody}>
+          <div className={styles.settingsList}>{children}</div>
+        </div>
       </div>
     </div>
   );
 }
 
-export default Settings;
+export { Settings, BooleanItem };

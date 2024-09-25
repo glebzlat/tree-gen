@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import Editor from "react-simple-code-editor";
 import DarkModeSwitch from "./dark-mode-switch/DarkModeSwitch.jsx";
 import { indentedBlocks, createTree, generateTree } from "./createTree.mjs";
-import Settings from "./settings/Settings.jsx";
+import { Settings, BooleanItem } from "./settings/Settings.jsx";
 
 function detectTheme(callback) {
   const getThemeName = (e) => (e && e.matches ? "dark" : "light");
@@ -72,6 +72,17 @@ function App() {
   const [code, setCode] = useState("some code");
 
   const [settingsVisible, setSettingsVisible] = useState(false);
+  const [dotRoot, setDotRoot] = useState(false);
+
+  function processTree(code) {
+    let tree = createTree(code);
+    if (dotRoot) {
+      tree = [".", tree];
+    }
+    return generateTree(tree);
+  }
+
+  let isDarkStyle = themeState.name != "light";
 
   return (
     <main className={`${styles.main} ${themeState.style}`}>
@@ -116,15 +127,34 @@ function App() {
               />
             </div>
             <div className={styles.outputWindow}>
-              <pre className={styles.outputWindowText}>
-                {generateTree(createTree(code))}
-              </pre>
+              <pre className={styles.outputWindowText}>{processTree(code)}</pre>
             </div>
             <Settings
               visible={settingsVisible}
               setVisible={setSettingsVisible}
-              isDarkStyle={themeState.name != "light"}
-            />
+              isDarkStyle={isDarkStyle}
+            >
+              <BooleanItem
+                title="Tree Style"
+                onToggle={() => {}}
+                isDarkStyle={isDarkStyle}
+              ></BooleanItem>
+              <BooleanItem
+                title="Insert ‘.’ as root node"
+                onToggle={() => setDotRoot(!dotRoot)}
+                isDarkStyle={isDarkStyle}
+              ></BooleanItem>
+              <BooleanItem
+                title="Full node path"
+                onToggle={() => {}}
+                isDarkStyle={isDarkStyle}
+              ></BooleanItem>
+              <BooleanItem
+                title="Trailing slash"
+                onToggle={() => {}}
+                isDarkStyle={isDarkStyle}
+              ></BooleanItem>
+            </Settings>
           </div>
           <div className={styles.footer}>
             <button className={styles.usageBtn}>
