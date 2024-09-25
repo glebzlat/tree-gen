@@ -5,6 +5,7 @@ import {
   countLeadingSpace,
   indentedBlocks,
   createTree,
+  addParents,
 } from "../src/app/createTree.mjs";
 
 describe("splitBy", function () {
@@ -71,4 +72,36 @@ describe("createTree", function () {
     "line1",
     ["line2", ["line3"], "line4"],
   ]);
+});
+
+describe("addParents", function () {
+  assert.deepEqual(addParents(["dir", ["file1", "file2"]]), [
+    "dir",
+    ["dir/file1", "dir/file2"],
+  ]);
+  assert.deepEqual(
+    addParents([
+      "dir1",
+      ["subdir1", ["file1", "file2"], "subdir2", ["file1", "file2"], "subdir3"],
+      "dir2",
+    ]),
+    [
+      "dir1",
+      [
+        "dir1/subdir1",
+        ["dir1/subdir1/file1", "dir1/subdir1/file2"],
+        "dir1/subdir2",
+        ["dir1/subdir2/file1", "dir1/subdir2/file2"],
+        "dir1/subdir3",
+      ],
+      "dir2",
+    ],
+  );
+
+  describe("with trailingSlash", function () {
+    assert.deepEqual(
+      addParents(["dir", ["file1", "file2"]], true),
+      ["dir/", ["dir/file1", "dir/file2"]],
+    );
+  });
 });

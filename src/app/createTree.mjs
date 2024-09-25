@@ -186,5 +186,56 @@ function generateTree(tree) {
   return dfs(tree, "", 0);
 }
 
+/** Adds parent node names to each leaf node of the tree
+ *
+ * Returns the reference to the same tree.
+ *
+ * @param {Array<string|Array>} tree
+ * @param {boolean} [trailingSlash=false] add trailing slash
+ */
+function addParents(tree, trailingSlash = false) {
+  let parents = [];
+  let prevNode;
+
+  /**
+   * @param {Array<Array|string>} arr
+   * @param {Array<string>} parents
+   */
+  function _traverse(arr) {
+    const lastIdx = arr.length - 1;
+
+    for (let i = 0; i < arr.length; ++i) {
+      if (typeof arr[i] == "string") {
+        prevNode = arr[i];
+        if (parents.length != 0) {
+          arr[i] = parents.join("/") + "/" + arr[i];
+        }
+        if (trailingSlash && !(i == lastIdx || typeof arr[i + 1] == "string")) {
+          // Check wheter arr[i] is a leaf node. Leaf nodes are "files", and
+          // files do not have trailing slash.
+          // arr[i] is a leaf node if there is no more nodes
+          //                       or the next node is string
+          arr[i] += "/";
+        }
+        continue;
+      }
+
+      parents.push(prevNode);
+      _traverse(arr[i]);
+      parents.pop();
+    }
+  }
+
+  _traverse(tree);
+  return tree;
+}
+
 export default createTree;
-export { splitBy, countLeadingSpace, indentedBlocks, createTree, generateTree};
+export {
+  splitBy,
+  countLeadingSpace,
+  indentedBlocks,
+  createTree,
+  generateTree,
+  addParents,
+};
