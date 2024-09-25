@@ -199,9 +199,10 @@ function generateTree(
  * Returns the reference to the same tree.
  *
  * @param {Array<string|Array>} tree
+ * @param {boolean} addPath
  * @param {boolean} [trailingSlash=false] add trailing slash
  */
-function addParents(tree, trailingSlash = false) {
+function addParents(tree, addPath, trailingSlash = false) {
   let parents = [];
   let prevNode;
 
@@ -215,7 +216,7 @@ function addParents(tree, trailingSlash = false) {
     for (let i = 0; i < arr.length; ++i) {
       if (typeof arr[i] == "string") {
         prevNode = arr[i];
-        if (parents.length != 0) {
+        if (addPath && parents.length != 0) {
           arr[i] = parents.join("/") + "/" + arr[i];
         }
         if (trailingSlash && !(i == lastIdx || typeof arr[i + 1] == "string")) {

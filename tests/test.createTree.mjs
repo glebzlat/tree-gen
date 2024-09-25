@@ -75,16 +75,25 @@ describe("createTree", function () {
 });
 
 describe("addParents", function () {
-  assert.deepEqual(addParents(["dir", ["file1", "file2"]]), [
-    "dir",
-    ["dir/file1", "dir/file2"],
-  ]);
   assert.deepEqual(
-    addParents([
-      "dir1",
-      ["subdir1", ["file1", "file2"], "subdir2", ["file1", "file2"], "subdir3"],
-      "dir2",
-    ]),
+    addParents(["dir", ["file1", "file2"]], true),
+    ["dir", ["dir/file1", "dir/file2"]],
+  );
+  assert.deepEqual(
+    addParents(
+      [
+        "dir1",
+        [
+          "subdir1",
+          ["file1", "file2"],
+          "subdir2",
+          ["file1", "file2"],
+          "subdir3",
+        ],
+        "dir2",
+      ],
+      true,
+    ),
     [
       "dir1",
       [
@@ -99,9 +108,9 @@ describe("addParents", function () {
   );
 
   describe("with trailingSlash", function () {
-    assert.deepEqual(
-      addParents(["dir", ["file1", "file2"]], true),
-      ["dir/", ["dir/file1", "dir/file2"]],
-    );
+    assert.deepEqual(addParents(["dir", ["file1", "file2"]], true, true), [
+      "dir/",
+      ["dir/file1", "dir/file2"],
+    ]);
   });
 });

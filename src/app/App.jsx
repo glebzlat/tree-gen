@@ -98,9 +98,7 @@ function App() {
     if (dotRoot) {
       tree = [".", tree];
     }
-    if (parentNodes) {
-      tree = addParents(tree, trailingSlash);
-    }
+    addParents(tree, parentNodes, trailingSlash);
     return generateTree(tree, treeStyle);
   }
 
