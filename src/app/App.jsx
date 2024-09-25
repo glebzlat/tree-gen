@@ -8,7 +8,12 @@ import SettingsIco from "./icons/Settings.svg";
 import { useEffect, useState } from "react";
 import Editor from "react-simple-code-editor";
 import DarkModeSwitch from "./dark-mode-switch/DarkModeSwitch.jsx";
-import { indentedBlocks, createTree, generateTree } from "./createTree.mjs";
+import {
+  indentedBlocks,
+  createTree,
+  generateTree,
+  addParents,
+} from "./createTree.mjs";
 import { Settings, BooleanItem } from "./settings/Settings.jsx";
 
 function detectTheme(callback) {
@@ -73,11 +78,16 @@ function App() {
 
   const [settingsVisible, setSettingsVisible] = useState(false);
   const [dotRoot, setDotRoot] = useState(false);
+  const [parentNodes, setParentNodes] = useState(false);
+  const [trailingSlash, setTrailingSlash] = useState(false);
 
   function processTree(code) {
     let tree = createTree(code);
     if (dotRoot) {
       tree = [".", tree];
+    }
+    if (parentNodes) {
+      tree = addParents(tree, trailingSlash);
     }
     return generateTree(tree);
   }
@@ -146,12 +156,12 @@ function App() {
               ></BooleanItem>
               <BooleanItem
                 title="Full node path"
-                onToggle={() => {}}
+                onToggle={() => setParentNodes(!parentNodes)}
                 isDarkStyle={isDarkStyle}
               ></BooleanItem>
               <BooleanItem
                 title="Trailing slash"
-                onToggle={() => {}}
+                onToggle={() => setTrailingSlash(!trailingSlash)}
                 isDarkStyle={isDarkStyle}
               ></BooleanItem>
             </Settings>
