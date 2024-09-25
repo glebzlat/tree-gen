@@ -1,0 +1,112 @@
+@use "../../shared.scss" as *;
+
+.dropdown {
+  @extend %theme-transition;
+  @extend .font-sans-serif;
+  position: relative;
+  z-index: 5;
+  width: rem(165);
+  height: rem(26);
+  border-radius: rem(13);
+
+  &--activate {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: start;
+    align-items: center;
+  }
+
+  &--main-text {
+    font-size: rem(14);
+    margin-left: rem(11);
+  }
+
+  &--arrow {
+    position: absolute;
+    width: rem(6);
+    height: rem(10);
+    top: 0;
+    right: rem(8);
+    bottom: 0;
+    margin: auto 0;
+    transition: transform $ease-out-expo .5s;
+
+    .dark-theme & path {
+      fill: color(text);
+    }
+
+    .light-theme & path {
+      fill: color(light-text);
+    }
+
+    .dropdown--active & {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &--content {
+    @extend %theme-transition;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0 rem(6);
+    top: 0;
+    left: 0;
+    width: rem(165);
+    height: max-content;
+    border-radius: rem(13);
+    padding-top: rem(26);
+    opacity: 0;
+    transition: opacity $ease-out-expo .5s;
+    pointer-events: none;
+
+    .dropdown--active & {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dark-theme & {
+      background-color: color(icons-background);
+      color: color(text);
+    }
+
+    .light-theme & {
+      background-color: color(light-theme-switch-background);
+      color: color(light-text);
+    }
+  }
+
+  &--item {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: rem(6) 0;
+  }
+
+  &--item-text {
+    @extend .font-sans-serif;
+    font-size: rem(14);
+    margin-left: rem(11);
+  }
+
+  &.dark-theme {
+    background-color: color(icons-background);
+    color: color(text);
+  }
+
+  &.light-theme {
+    background-color: color(light-theme-switch-background);
+    color: color(light-text);
+  }
+}
+
+.cursor-border {
+  overflow: hidden;
+  width: rem(165);
+  height: rem(26);
+  border-radius: rem(13);
+}
