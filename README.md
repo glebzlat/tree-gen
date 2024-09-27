@@ -13,6 +13,10 @@ Simple and small utility for tree generation.
   - [x] Trailing slash
   - [ ] Unicode folder character
 - [ ] About (or "How to use?") window
+- [ ] Download button
+- [ ] Copy button
+- [ ] Share button
+  - [ ] Sharing mechanism
 - [ ] Adaptive design
 - [ ] GitHub links
 - [ ] GitHub Pages deployment
