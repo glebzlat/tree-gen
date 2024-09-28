@@ -16,6 +16,7 @@ import {
   addParents,
 } from "./createTree.mjs";
 import { Settings, BooleanItem, EnumItem } from "./settings/Settings.jsx";
+import { saveAs } from "file-saver";
 
 /**
  * @param {Object} props
@@ -151,10 +152,15 @@ function App() {
             <div className={styles.headerUserActions}>
               <div className={styles.headerShareActions}>
                 <button className={styles.actionButton}>
-                  <Download className={styles.downloadIcon} />
-                </button>
-                <button className={styles.actionButton}>
-                  <Copy className={styles.copyIcon} />
+                  <Download
+                    className={styles.downloadIcon}
+                    onClick={() => {
+                      let blob = new Blob([tree], {
+                        type: "text/plain;charset=utf-8",
+                      });
+                      saveAs(blob, "tree.txt");
+                    }}
+                  />
                 </button>
                 <CopyButton />
                 <button className={styles.actionButton}>
