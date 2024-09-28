@@ -8,6 +8,7 @@ import SettingsIco from "./icons/Settings.svg";
 import { useEffect, useState } from "react";
 import Editor from "react-simple-code-editor";
 import DarkModeSwitch from "./dark-mode-switch/DarkModeSwitch.jsx";
+import Notification from "./notification/Notification.jsx";
 import {
   indentedBlocks,
   createTree,
@@ -15,6 +16,39 @@ import {
   addParents,
 } from "./createTree.mjs";
 import { Settings, BooleanItem, EnumItem } from "./settings/Settings.jsx";
+
+/**
+ * @param {Object} props
+ * @param {string} props.text
+ * @param {boolean} props.isDarkStyle
+ */
+function CopyButton({ text, isDarkStyle }) {
+  const duration = 1000;
+  const [activated, setActivated] = useState(false);
+
+  return (
+    <button
+      style={{
+        position: "relative",
+      }}
+      className={styles.actionButton}
+      onClick={() => {
+        setActivated(true);
+        navigator.clipboard.writeText(text);
+        setTimeout(() => setActivated(false), duration);
+      }}
+    >
+      <Copy className={styles.copyIcon} />
+
+      <Notification
+        text="Copied!"
+        onClick={() => setActivated(false)}
+        active={activated}
+        isDarkStyle={isDarkStyle}
+      />
+    </button>
+  );
+}
 
 function detectTheme(callback) {
   const getThemeName = (e) => (e && e.matches ? "dark" : "light");
@@ -102,6 +136,8 @@ function App() {
     return generateTree(tree, treeStyle);
   }
 
+  let tree = processTree(code);
+
   let isDarkStyle = themeState.name != "light";
 
   return (
@@ -120,6 +156,7 @@ function App() {
                 <button className={styles.actionButton}>
                   <Copy className={styles.copyIcon} />
                 </button>
+                <CopyButton />
                 <button className={styles.actionButton}>
                   <Share className={styles.shareIcon} />
                 </button>
@@ -147,7 +184,7 @@ function App() {
               />
             </div>
             <div className={styles.outputWindow}>
-              <pre className={styles.outputWindowText}>{processTree(code)}</pre>
+              <pre className={styles.outputWindowText}>{tree}</pre>
             </div>
             <Settings
               visible={settingsVisible}

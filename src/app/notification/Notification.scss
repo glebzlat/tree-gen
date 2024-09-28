@@ -1,0 +1,67 @@
+@use "../../shared.scss" as *;
+
+.notification {
+  @extend %theme-transition;
+  transition: opacity $ease-out-expo .5s;
+  position: absolute;
+  z-index: 10;
+  bottom: -150%;
+  padding: rem(7) rem(12);
+  border-radius: rem(6);
+  pointer-events: none;
+  cursor: default;
+  opacity: 0;
+  border: rem(1px) solid;
+
+  &__text {
+    @extend %theme-transition;
+    @extend .font-sans-serif-regular;
+    font-size: rem(14);
+
+    .dark-theme & {
+      color: color(notification-text);
+    }
+
+    .light-theme & {
+      color: color(light-notification-text);
+    }
+  }
+
+  &__triangle {
+    @extend %theme-transition;
+    $height: rem(10);
+    $width: $height;
+    $half-width: calc($width / 2);
+
+    position: absolute;
+    top: - $half-width;
+    left: calc(50% - $half-width);
+    height: $height;
+    width: $width;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    transform: rotate(-45deg);
+
+    .dark-theme & {
+      background-color: color(notification-background);
+    }
+
+    .light-theme & {
+      background-color: color(light-notification-background);
+    }
+  }
+
+  &--active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  &.dark-theme {
+    background-color: color(notification-background);
+    border-color: color(notification-background);
+  }
+
+  &.light-theme {
+    background-color: color(light-notification-background);
+    border-color: color(light-notification-background);
+  }
+}

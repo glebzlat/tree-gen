@@ -1,5 +1,5 @@
 @use 'sass:math';
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Source+Code+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:ital,wght@0,400;1,100&family=Source+Code+Pro&display=swap');
 
 $ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -12,11 +12,13 @@ $colors: (
   "inner-border": #6C6C6C,
   "icons": #E2E2E2,
   "icons-background": #20282B,
+  "notification-background": #20282B,
   "text": #FFFFFF,
   "icon-text": #E2E2E2,
   "theme-switch-background": #20282B,
   "theme-switch-foreground": #303C40,
   "theme-switch-text": #E2E2E2,
+  "notification-text": #E2E2E2,
   "indents": #3A464A,
 
   "light-main-background": #EEF9FD,
@@ -27,11 +29,13 @@ $colors: (
   "light-inner-border": #D1D1D1,
   "light-icons": #E2E2E2,
   "light-icons-background": #39474A,
+  "light-notification-background": #39474A,
   "light-text": #262F32,
   "light-icon-text": #141414,
   "light-theme-switch-background": #D1E0E4,
   "light-theme-switch-foreground": #ECF9FE,
   "light-theme-switch-text": #141414,
+  "light-notification-text": #E2E2E2,
   "light-indents": #BECED4,
 
   "switch-active": #33AED7,
@@ -73,6 +77,12 @@ $colors: (
 .font-sans-serif {
   font-family: "Roboto Condensed", sans-serif;
   font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-sans-serif-regular {
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
