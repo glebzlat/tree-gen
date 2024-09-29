@@ -1,5 +1,5 @@
 import styles from "./Settings.scss";
-import Close from "../icons/Close.svg";
+import Header from "../header/Header.jsx";
 import Switch from "../switch/Switch.jsx";
 import Dropdown from "../dropdown/Dropdown.jsx";
 
@@ -64,16 +64,11 @@ function Settings({ visible, setVisible, isDarkStyle, children }) {
       className={`${styles.settings} ${getActiveClass()} ${getThemeClass()}`}
     >
       <div className={styles.settingsInner}>
-        <div className={styles.settingsHeader}>
-          <header className={styles.settingsTitle}>Settings</header>
-          <button
-            className={styles.settingsClose}
-            onClick={() => setVisible(false)}
-          >
-            <Close className={styles.settingsCloseIcon} fill={"#fff"} />
-          </button>
-          <div className={styles.settingsHeaderUnderline}></div>
-        </div>
+        <Header
+          text="Settings"
+          onClose={() => setVisible(false)}
+          isDarkStyle={isDarkStyle}
+        ></Header>
         <div className={styles.settingsBody}>
           <div className={styles.settingsList}>{children}</div>
         </div>
