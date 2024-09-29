@@ -15,12 +15,14 @@
 
   &__inner {
     margin: rem(16) rem(30);
+    height: rem(530);
   }
 
   &__body {
     @extend .font-sans-serif-regular;
+    overflow: auto;
     width: 100%;
-    height: 100%;
+    height: 90%;
     margin: rem(11) 0;
   }
 
