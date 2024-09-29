@@ -1,5 +1,6 @@
 import styles from "./About.scss";
 import Header from "../header/Header.jsx";
+import AboutContent from "../../About.md";
 
 function About({ visible, setVisible, isDarkStyle }) {
   function getActiveClass() {
@@ -20,7 +21,10 @@ function About({ visible, setVisible, isDarkStyle }) {
           onClose={() => setVisible(false)}
           isDarkStyle={isDarkStyle}
         ></Header>
-        <div className={styles.aboutBody}></div>
+        <div
+          className={styles.aboutBody}
+          dangerouslySetInnerHTML={{ __html: AboutContent }}
+        ></div>
       </div>
     </div>
   );
