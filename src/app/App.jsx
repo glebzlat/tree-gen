@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Editor from "react-simple-code-editor";
 import DarkModeSwitch from "./dark-mode-switch/DarkModeSwitch.jsx";
 import Notification from "./notification/Notification.jsx";
+import About from "./about/About.jsx";
 import {
   indentedBlocks,
   createTree,
@@ -128,6 +129,8 @@ function App() {
   const [parentNodes, setParentNodes] = useState(false);
   const [trailingSlash, setTrailingSlash] = useState(false);
 
+  const [aboutVisible, setAboutVisible] = useState(false);
+
   function processTree(code) {
     let tree = createTree(code);
     if (dotRoot) {
@@ -226,10 +229,23 @@ function App() {
                 isDarkStyle={isDarkStyle}
               ></BooleanItem>
             </Settings>
+            <About
+              visible={aboutVisible}
+              setVisible={setAboutVisible}
+              isDarkStyle={isDarkStyle}
+            />
           </div>
-          <div className={styles.footer}>
+          <div
+            className={styles.footer}
+            style={{ position: "relative", zIndex: 1 }}
+          >
             <button className={styles.usageBtn}>
-              <p className={styles.usageBtnText}>How to use?</p>
+              <p
+                className={styles.usageBtnText}
+                onClick={() => setAboutVisible(!aboutVisible)}
+              >
+                How to use?
+              </p>
             </button>
             <p className={styles.author}>
               Created by{" "}

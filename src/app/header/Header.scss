@@ -1,7 +1,6 @@
 @use "../../shared.scss" as *;
 
 .header {
-  @extend %theme-transition;
   @extend .font-sans-serif;
 
   position: relative;
@@ -28,6 +27,7 @@
   }
 
   &__close {
+    @extend %theme-transition;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,6 +45,7 @@
   }
 
   &__close-icon {
+    @extend %theme-transition;
     width: rem(12);
     height: rem(12);
 
