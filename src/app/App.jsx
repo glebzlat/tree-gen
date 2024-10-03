@@ -19,6 +19,10 @@ import {
 import { Settings, BooleanItem, EnumItem } from "./settings/Settings.jsx";
 import { saveAs } from "file-saver";
 
+document.querySelector("body").onkeydown = (ev) => {
+  if (ev.key == "Tab") ev.preventDefault();
+};
+
 /**
  * @param {Object} props
  * @param {string} props.text
