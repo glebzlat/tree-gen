@@ -169,7 +169,7 @@ function App() {
                     }}
                   />
                 </button>
-                <CopyButton />
+                <CopyButton text={tree} isDarkStyle={isDarkStyle} />
                 <button className={styles.actionButton}>
                   <Share className={styles.shareIcon} />
                 </button>
