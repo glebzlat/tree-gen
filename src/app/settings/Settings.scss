@@ -36,12 +36,12 @@
   }
 
   &.dark-theme {
-    background-color: color(main-background);
+    background-color: color(settings-background);
     color: color(text);
   }
 
   &.light-theme {
-    background-color: color(light-main-background);
+    background-color: color(light-settings-background);
     color: color(light-text);
   }
 }

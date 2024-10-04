@@ -59,12 +59,12 @@
   }
 
   &.dark-theme {
-    background-color: color(main-background);
+    background-color: color(header-background);
     color: color(text);
   }
 
   &.light-theme {
-    background-color: color(light-main-background);
+    background-color: color(light-header-background);
     color: color(light-text);
   }
 }

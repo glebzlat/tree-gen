@@ -22,21 +22,37 @@
     @extend .font-sans-serif-regular;
     overflow: auto;
     width: 100%;
-    height: 90%;
-    margin: rem(11) 0;
+    height: 94%;
+    font-size: 14px;
   }
 
-  & p + p {
+  &__body > *:first-child {
+    margin-top: rem(20);
+  }
+
+  &__body > *:last-child {
+    margin-bottom: rem(20);
+  }
+
+  & code {
+    @extend .font-mono;
+  }
+
+  & p {
+    line-height: rem(20);
+  }
+
+  &__body > * + * {
     margin-top: rem(13);
   }
 
   &.dark-theme {
-    background-color: color(main-background);
+    background-color: color(about-background);
     color: color(text);
   }
 
   &.light-theme {
-    background-color: color(light-main-background);
+    background-color: color(light-about-background);
     color: color(light-text);
   }
 }
