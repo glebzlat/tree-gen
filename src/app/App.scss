@@ -172,6 +172,12 @@
   height: 100%;
   @extend .font-mono;
   font-size: rem(13);
+  overflow: visible !important;
+
+  & textarea {
+    outline: none;
+    padding-bottom: rem(16);
+  }
 
   .dark-theme & {
     color: color(text)
@@ -215,16 +221,31 @@
     width: max-content;
     padding: rem(16) rem(30);
     font-size: rem(13);
+
+    .dark-theme & {
+      color: color(text);
+    }
+
+    .light-theme & {
+      color: color(light-text);
+    }
+  }
+
+  &__error {
+    @extend .font-mono;
+    white-space: pre-wrap;
+    width: max-content;
+    padding: rem(16) rem(30);
+    font-size: rem(13);
+    color: red;
   }
 
   .dark-theme & {
     background-color: color(output-background);
-    color: color(text)
   }
 
   .light-theme & {
     background-color: color(light-output-background);
-    color: color(light-text)
   }
 }
 

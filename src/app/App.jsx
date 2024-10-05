@@ -169,6 +169,17 @@ function App() {
 
   let isDarkStyle = themeState.name != "light";
 
+  document.querySelectorAll("textarea").forEach((textarea) => {
+    const initialHeight = textarea.scrollHeight;
+    textarea.style.height = initialHeight + "px";
+    textarea.style.overflowY = "hidden";
+
+    textarea.addEventListener("input", () => {
+      textarea.style.height = initialHeight + "px";
+      textarea.style.height = textarea.scrollHeight + "px";
+    });
+  });
+
   return (
     <main className={`${styles.main} ${themeState.style}`}>
       <div className={styles.container}>
