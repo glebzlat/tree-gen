@@ -11,6 +11,7 @@ import DarkModeSwitch from "./dark-mode-switch/DarkModeSwitch.jsx";
 import Notification from "./notification/Notification.jsx";
 import About from "./about/About.jsx";
 import {
+  TreeCreationError,
   indentedBlocks,
   createTree,
   generateTree,
@@ -144,7 +145,27 @@ function App() {
     return generateTree(tree, treeStyle);
   }
 
-  let tree = processTree(code);
+  let tree = "";
+  let error = null;
+
+  try {
+    tree = processTree(code);
+  } catch (e) {
+    if (e instanceof TreeCreationError) {
+      error = e;
+    }
+  }
+
+  function createOutputContent() {
+    if (error) {
+      return (
+        <pre
+          className={styles.outputWindowError}
+        >{`${error.message}`}</pre>
+      );
+    }
+    return <pre className={styles.outputWindowText}>{tree}</pre>;
+  }
 
   let isDarkStyle = themeState.name != "light";
 
@@ -196,9 +217,7 @@ function App() {
                 tabSize={2}
               />
             </div>
-            <div className={styles.outputWindow}>
-              <pre className={styles.outputWindowText}>{tree}</pre>
-            </div>
+            <div className={styles.outputWindow}>{createOutputContent()}</div>
             <Settings
               visible={settingsVisible}
               setVisible={setSettingsVisible}

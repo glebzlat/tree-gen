@@ -241,6 +241,7 @@ function addParents(tree, addPath, trailingSlash = false) {
 
 export default createTree;
 export {
+  TreeCreationError,
   splitBy,
   countLeadingSpace,
   indentedBlocks,
