@@ -34,16 +34,122 @@
     margin-bottom: rem(20);
   }
 
-  & code {
-    @extend .font-mono;
-  }
+  &__body {
 
-  & p {
-    line-height: rem(20);
-  }
+    & > * {
+      margin-left: rem(15);
+      max-width: 97%;
+    }
 
-  &__body > * + * {
-    margin-top: rem(13);
+    & * + * {
+      margin-top: rem(13);
+    }
+
+    & h1 {
+      font-size: rem(20);
+    }
+
+    & h2 {
+      font-size: rem(18);
+      margin-top: rem(18);
+    }
+
+    & h3 {
+      font-size: rem(16);
+    }
+
+    & code {
+      @extend .font-mono;
+      padding: rem(1) rem(3);
+      border: rem(1) solid;
+      border-radius: rem(2);
+      border-color: rgba($color: color(code-border), $alpha: 0.5);
+
+      .dark-theme & {
+        background-color: rgba(color(code-background), 0.5);
+      }
+
+      .light-theme & {
+        background-color: rgba(color(light-code-background), 0.5);
+      }
+    }
+
+    & pre > code {
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      background-color: transparent !important;
+    }
+
+    & pre {
+      padding: rem(4) rem(5) rem(8) rem(5);
+      border: rem(1) solid color(code-border);
+      border-radius: rem(2);
+
+      .dark-theme & {
+        background-color: color(code-background);
+      }
+
+      .light-theme & {
+        background-color: color(light-code-background);
+      }
+    }
+
+    & p {
+      line-height: rem(20);
+    }
+
+    & li {
+      margin-left: rem(15);
+      line-height: rem(18);
+      list-style: disc;
+    }
+
+    & li + li {
+      margin-top: rem(4);
+    }
+
+    & summary {
+      cursor: pointer;
+      padding: rem(7) rem(15);
+
+      .dark-theme & {
+        background-color: color(summary-background);
+        color: color(summary-text);
+      }
+
+      .light-theme & {
+        background-color: color(light-summary-background);
+        color: color(light-summary-text);
+      }
+    }
+
+    & details {
+      border: rem(1) solid;
+      border-radius: rem(5);
+
+      .dark-theme & {
+        border-color: color(summary-background);
+      }
+
+      .light-theme & {
+        border-color: color(light-summary-background);
+      }
+    }
+
+    & details:nth-child(2) {
+      margin-top: rem(10);
+    }
+
+    & details > *:last-child {
+      margin-bottom: rem(10);
+    }
+
+    & details > *:not(summary) {
+      margin-left: rem(10);
+      margin-right: rem(10);
+    }
+
   }
 
   &.dark-theme {

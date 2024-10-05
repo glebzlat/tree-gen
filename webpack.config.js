@@ -63,8 +63,8 @@ module.exports = {
           {
             loader: "markdown-loader",
             options: {
-              // Pass options to marked
-              // See https://marked.js.org/using_advanced#options
+              // https://marked.js.org/using_advanced#options
+              gfm: true
             },
           },
         ],

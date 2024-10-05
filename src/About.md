@@ -1,54 +1,115 @@
-Online tree generator tool.
+# What is it?
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+`tree-gen` is an online tree generator tool that mimics the output of the
+`tree` Unix command. The reason I wrote it is because it is interesting,
+obviously, and because I wanted to try React framework.
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+## User Interface
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+I briefly explain the user interface. Alhough it is pretty clear what is what,
+because all buttons have icons or titles.
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+There are following elements in header, from left to right:
+- GitHub icon, which is a link to this project's GitHub repository;
+- Download button that allows you to download the rendered tree as text file,
+- Copy button that allows you to copy the rendered tree,
+- Share button that allows you to share the rendered tree as a link,
+- Settings, button too, that, basically, opens settings,
+- and Appearance switch.
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+And in footer there are, from left to right:
+- "How to use?" button that opens About window and
+- Link to my GitHub profile (you can subscribe btw)
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+## Settings
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+Settings window has a plenty of options that allow you to alter the
+appearance of a rendered tree.
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+<details>
+<summary>Fancy style</summary>
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+Use characters that `tree` command uses.
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+```
+dir
+├── subdir
+│   └── file
+└── subdif
+    ├── file
+    └── file
+```
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+</details>
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+<details>
+<summary>ASCII style</summary>
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis necessitatibus
-neque quis officia dolores autem voluptates iusto, fuga repellendus illo libero
-vitae perspiciatis facilis eligendi excepturi vero numquam a commodi.
+Use plain ASCII characters: `'+'`, `'|'`, and `'-'`.
 
+```
+dir
+|── subdir
+|   +── file
++── subdif
+    |── file
+    +── file
+```
+
+</details>
+
+<details>
+<summary>Insert <code>'.'</code> as root node</summary>
+
+```
+.
+└── dir
+    ├── subdir
+    │   └── file
+    └── subdir
+        ├── file
+        └── file
+```
+
+</details>
+
+<details>
+<summary>Full node path</summary>
+
+This setting emulates the output of `tree -f` command.
+
+```
+dir
+├── dir/subdir
+│   └── dir/subdir/file
+└── dir/subdir
+    ├── dir/subdir/file
+    └── dir/subdir/file
+```
+
+</details>
+
+<details>
+<summary>Trailing slash</summary>
+
+This setting emulates the output of `tree -F` command.
+
+```
+dir/
+├── subdir/
+│   └── file
+└── subdir/
+    ├── file
+    └── file
+```
+
+</details>
+
+## Feedback
+
+If you have encountered a bug or have an idea, click that GitHub link at the
+top-left corner and file an issue. Also star this project if you liked it.
+
+## License
+
+Licensed under MIT License.
