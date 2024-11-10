@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -64,7 +65,7 @@ module.exports = {
             loader: "markdown-loader",
             options: {
               // https://marked.js.org/using_advanced#options
-              gfm: true
+              gfm: true,
             },
           },
         ],
@@ -77,6 +78,7 @@ module.exports = {
       template: path.resolve(__dirname, "src", "index.html"),
     }),
     new MiniCssExtractPlugin(),
+    new CompressionPlugin()
   ],
   devtool: "source-map",
   devServer: {
