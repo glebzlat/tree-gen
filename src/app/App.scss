@@ -157,7 +157,7 @@
   @extend %theme-transition;
   flex-basis: 50%;
   overflow: auto;
-  padding: rem(16) rem(30);
+  padding: rem(6) rem(20);
 
   .dark-theme & {
     background-color: color(background);
@@ -169,14 +169,25 @@
 }
 
 .code-editor {
+  $textarea-vertical-padding: rem(10);
+  $textarea-horizontal-padding: rem(10);
+  $textarea-bottom-padding: rem(16);
   height: 100%;
   @extend .font-mono;
   font-size: rem(13);
   overflow: visible !important;
 
+  %textarea-paddings {
+    padding: rem(10) rem(10) rem(16) rem(10) !important;
+  }
+
   & textarea {
+    @extend %textarea-paddings;
     outline: none;
-    padding-bottom: rem(16);
+  }
+
+  & pre {
+    @extend %textarea-paddings;
   }
 
   .dark-theme & {
