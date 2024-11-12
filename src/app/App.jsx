@@ -159,9 +159,7 @@ function App() {
   function createOutputContent() {
     if (error) {
       return (
-        <pre
-          className={styles.outputWindowError}
-        >{`${error.message}`}</pre>
+        <pre className={styles.outputWindowError}>{`${error.message}`}</pre>
       );
     }
     return <pre className={styles.outputWindowText}>{tree}</pre>;
@@ -182,112 +180,114 @@ function App() {
 
   return (
     <main className={`${styles.main} ${themeState.style}`}>
-      <div className={styles.container}>
-        <div className={styles.window}>
-          <div className={styles.header}>
-            <a href="#" className="github-repo-link">
-              <Github className={styles.githubIcon} />
-            </a>
-            <div className={styles.headerUserActions}>
-              <div className={styles.headerShareActions}>
-                <button className={styles.actionButton}>
-                  <Download
-                    className={styles.downloadIcon}
-                    onClick={() => {
-                      let blob = new Blob([tree], {
-                        type: "text/plain;charset=utf-8",
-                      });
-                      saveAs(blob, "tree.txt");
-                    }}
-                  />
-                </button>
-                <CopyButton text={tree} isDarkStyle={isDarkStyle} />
-                <button className={styles.actionButton}>
-                  <Share className={styles.shareIcon} />
-                </button>
-              </div>
-              <button
-                className={styles.actionButton}
-                onClick={() => setSettingsVisible(!settingsVisible)}
-              >
-                <SettingsIco className={styles.settingsIcon} />
-              </button>
-              <DarkModeSwitch
-                onChange={(state) => setThemeClass(state)}
-                initialState={themeState.name}
-              />
-            </div>
-          </div>
-          <div className={styles.windowBody}>
-            <div className={styles.codeInput}>
-              <Editor
-                className={styles.codeEditor}
-                value={code}
-                onValueChange={(code) => setCode(code)}
-                highlight={highlight}
-                tabSize={2}
-              />
-            </div>
-            <div className={styles.outputWindow}>{createOutputContent()}</div>
-            <Settings
-              visible={settingsVisible}
-              setVisible={setSettingsVisible}
-              isDarkStyle={isDarkStyle}
-            >
-              <EnumItem
-                title="Tree Style"
-                values={["fancy", "ascii"]}
-                defaultValue="fancy"
-                onChange={(result) => {
-                  if (result === "fancy") {
-                    setTreeStyle(fancyTree);
-                  } else if (result === "ascii") {
-                    setTreeStyle(asciiTree);
-                  }
-                }}
-                isDarkStyle={isDarkStyle}
-              />
-              <BooleanItem
-                title="Insert ‘.’ as root node"
-                onToggle={() => setDotRoot(!dotRoot)}
-                isDarkStyle={isDarkStyle}
-              ></BooleanItem>
-              <BooleanItem
-                title="Full node path"
-                onToggle={() => setParentNodes(!parentNodes)}
-                isDarkStyle={isDarkStyle}
-              ></BooleanItem>
-              <BooleanItem
-                title="Trailing slash"
-                onToggle={() => setTrailingSlash(!trailingSlash)}
-                isDarkStyle={isDarkStyle}
-              ></BooleanItem>
-            </Settings>
-            <About
-              visible={aboutVisible}
-              setVisible={setAboutVisible}
-              isDarkStyle={isDarkStyle}
-            />
-          </div>
-          <div
-            className={styles.footer}
-            style={{ position: "relative", zIndex: 1 }}
-          >
-            <button className={styles.usageBtn}>
-              <p
-                className={styles.usageBtnText}
-                onClick={() => setAboutVisible(!aboutVisible)}
-              >
-                How to use?
-              </p>
-            </button>
-            <p className={styles.author}>
-              Created by{" "}
-              <a href="#" className={styles.authorLink}>
-                glebzlat
+      <div className={styles.flexContainer}>
+        <div className={styles.container}>
+          <div className={styles.window}>
+            <div className={styles.header}>
+              <a href="#" className="github-repo-link">
+                <Github className={styles.githubIcon} />
               </a>
-            </p>
-          </div>
+              <div className={styles.headerUserActions}>
+                <div className={styles.headerShareActions}>
+                  <button className={styles.actionButton}>
+                    <Download
+                      className={styles.downloadIcon}
+                      onClick={() => {
+                        let blob = new Blob([tree], {
+                          type: "text/plain;charset=utf-8",
+                        });
+                        saveAs(blob, "tree.txt");
+                      }}
+                    />
+                  </button>
+                  <CopyButton text={tree} isDarkStyle={isDarkStyle} />
+                  <button className={styles.actionButton}>
+                    <Share className={styles.shareIcon} />
+                  </button>
+                </div>
+                <button
+                  className={styles.actionButton}
+                  onClick={() => setSettingsVisible(!settingsVisible)}
+                >
+                  <SettingsIco className={styles.settingsIcon} />
+                </button>
+                <DarkModeSwitch
+                  onChange={(state) => setThemeClass(state)}
+                  initialState={themeState.name}
+                />
+              </div>
+            </div>
+            <div className={styles.windowBody}>
+              <div className={styles.codeInput}>
+                <Editor
+                  className={styles.codeEditor}
+                  value={code}
+                  onValueChange={(code) => setCode(code)}
+                  highlight={highlight}
+                  tabSize={2}
+                />
+              </div>
+              <div className={styles.outputWindow}>{createOutputContent()}</div>
+              <Settings
+                visible={settingsVisible}
+                setVisible={setSettingsVisible}
+                isDarkStyle={isDarkStyle}
+              >
+                <EnumItem
+                  title="Tree Style"
+                  values={["fancy", "ascii"]}
+                  defaultValue="fancy"
+                  onChange={(result) => {
+                    if (result === "fancy") {
+                      setTreeStyle(fancyTree);
+                    } else if (result === "ascii") {
+                      setTreeStyle(asciiTree);
+                    }
+                  }}
+                  isDarkStyle={isDarkStyle}
+                />
+                <BooleanItem
+                  title="Insert ‘.’ as root node"
+                  onToggle={() => setDotRoot(!dotRoot)}
+                  isDarkStyle={isDarkStyle}
+                ></BooleanItem>
+                <BooleanItem
+                  title="Full node path"
+                  onToggle={() => setParentNodes(!parentNodes)}
+                  isDarkStyle={isDarkStyle}
+                ></BooleanItem>
+                <BooleanItem
+                  title="Trailing slash"
+                  onToggle={() => setTrailingSlash(!trailingSlash)}
+                  isDarkStyle={isDarkStyle}
+                ></BooleanItem>
+              </Settings>
+              <About
+                visible={aboutVisible}
+                setVisible={setAboutVisible}
+                isDarkStyle={isDarkStyle}
+              />
+            </div>
+            <div
+              className={styles.footer}
+              style={{ position: "relative", zIndex: 1 }}
+            >
+              <button className={styles.usageBtn}>
+                <p
+                  className={styles.usageBtnText}
+                  onClick={() => setAboutVisible(!aboutVisible)}
+                >
+                  How to use?
+                </p>
+              </button>
+              <p className={styles.author}>
+                Created by{" "}
+                <a href="#" className={styles.authorLink}>
+                  glebzlat
+                </a>
+              </p>
+            </div>
+          </div>{" "}
         </div>
       </div>
     </main>

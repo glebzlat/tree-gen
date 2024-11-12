@@ -8,15 +8,23 @@
   padding: 0 rem(10);
 }
 
+.flex-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .container {
   max-width: rem(1116px + 10px);
+  width: 100%;
   padding: 0 rem(5px);
   margin: 0 auto;
 }
 
 .window {
   @extend %theme-transition;
-  margin-top: rem(165px);
+  // margin-top: rem(165px);
   overflow: hidden;
   border-radius: rem(7px);
 
